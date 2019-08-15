@@ -36,9 +36,9 @@ def index(request):
     tipos = TipoAusencia.objects.all();
 
     headings = ("Empleado",tipos[0],tipos[1], tipos[2], tipos[3],tipos[4])
-    allclientes = [(p.nombres, p.apellidos,contarTipo(tipos[0].id)
-    				,contarTipo(tipos[1].id),contarTipo(tipos[2].id)
-    				,contarTipo(tipos[3].id),contarTipo(tipos[4].id)
+    allclientes = [(p.nombres+" "+p.apellidos,contarTipo(tipos[0].id,p.id)
+    				,contarTipo(tipos[1].id,p.id),contarTipo(tipos[2].id,p.id)
+    				,contarTipo(tipos[3].id,p.id),contarTipo(tipos[4].id,p.id)
     	) for p in Empleado.objects.all()]
     #print allclientes
 
@@ -47,7 +47,7 @@ def index(request):
         [
             ('GRID', (0, 0), (3, -1), 1, colors.dodgerblue),
             ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),
-            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
+            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue),
         ]
     ))
     clientes.append(t)
@@ -57,6 +57,6 @@ def index(request):
     return response
 
 
-def contarTipo(id):
-	len_tipo = TipoAusencia.objects.filter(pk=id)
-	return str(len(len_tipo)-1)
+def contarTipo(id,id_empleado):
+	len_tipo = Registro.objects.filter(tipo_ausencia=id,empleado=id_empleado)
+	return str(len(len_tipo))
