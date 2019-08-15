@@ -35,7 +35,7 @@ def index(request):
 
     tipos = TipoAusencia.objects.all();
 
-    headings = ("Empleado",tipos[0],tipos[1], tipos[2], tipos[3],tipos[4])
+    headings = ("EMPLEADO",tipos[0],tipos[1], tipos[2], tipos[3],tipos[4])
     allclientes = [(p.nombres+" "+p.apellidos,contarTipo(tipos[0].id,p.id)
     				,contarTipo(tipos[1].id,p.id),contarTipo(tipos[2].id,p.id)
     				,contarTipo(tipos[3].id,p.id),contarTipo(tipos[4].id,p.id)
@@ -45,7 +45,7 @@ def index(request):
     t = Table([headings] + allclientes)
     t.setStyle(TableStyle(
         [
-            ('GRID', (0, 0), (3, -1), 1, colors.dodgerblue),
+            ('GRID', (0, 0), (5, -1), 1, colors.dodgerblue),
             ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),
             ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue),
         ]
